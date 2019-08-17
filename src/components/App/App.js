@@ -5,6 +5,23 @@ import Signup from '../Signup';
 import Dashboard from '../Dashboard';
 import Chat from '../Chat';
 
+// use whenever you want private route
+const PrivateRoute = ({ component: IncomingComponent, ...rest }) => (
+  <Route
+    {...rest}
+    render={props => (
+      (localStorage.getItem('token') && localStorage.getItem('userid')) ? (
+        <IncomingComponent {...props} />
+      ) : (
+        <Redirect to={{
+          pathname: '/',
+          state: { from: props.location },
+        }}
+        />
+      )
+    )}
+  />
+);
 class App extends Component {
   render() {
     return (
@@ -13,8 +30,8 @@ class App extends Component {
         <Switch>
         <Route exact path='/' component={Login}></Route>
         <Route exact path='/signup' component={Signup}></Route>
-        <Route exact path='/dashboard' component={Dashboard}></Route>
-        <Route exact path='/chat' component={Chat}></Route>
+        <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path='/chat' component={Chat}/>
         </Switch>
       </Router>
       </div>

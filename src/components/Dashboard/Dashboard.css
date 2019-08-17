@@ -1,0 +1,20 @@
+.dasboard-align{
+    border:1px solid black;
+    margin:3%;
+    height:700px;
+}
+.bg-color-gray{
+    background-color: #BDC7D8;
+}
+.pt-3{
+    padding-top: 3%;
+}
+.pad-150{
+    padding: 150px;
+}
+.mtop-500{
+    margin-top: 500px;
+}
+.borderNone{
+    border:none
+}

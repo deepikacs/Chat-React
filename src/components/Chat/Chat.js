@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import ChatInput from './ChatInput';
 import ChatMessage from './ChatMessage';
+import { withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
+import {SearchDetails} from '../../Actions/SearchAction';
 
 const URL = 'ws://localhost:3030'
 
@@ -39,7 +42,7 @@ class Chat extends Component {
   submitMessage = messageString => {
       debugger;
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
-    const message = { name: this.state.name, message: messageString }
+    const message = { name: this.props.srcInfo, message: messageString }
     this.ws.send(JSON.stringify(message))
     this.addMessage(message)
   }
@@ -52,15 +55,10 @@ class Chat extends Component {
           <input
             type="text"
             id={'name'}
-            placeholder={'Enter your name...'}
-            value={this.state.name}
-            onChange={e => this.setState({ name: e.target.value })}
+            value={this.props.srcInfo}
+            className="borderNone"
           />
         </label>
-        <ChatInput
-          ws={this.ws}
-          onSubmitMessage={messageString => this.submitMessage(messageString)}
-        />
         {this.state.messages.map((message, index) =>
           <ChatMessage
             key={index}
@@ -68,9 +66,21 @@ class Chat extends Component {
             name={message.name}
           />,
         )}
+        <ChatInput
+          ws={this.ws}
+          onSubmitMessage={messageString => this.submitMessage(messageString)}
+        />
+       
       </div>
     )
   }
 }
 
-export default Chat
+// export default Chat;
+const mapStateToProps = (state) => {
+  debugger;
+  const { error, message,srcInfo } = state.SearchReducers;
+  return { error, message,srcInfo };
+};
+
+export default withRouter(connect(mapStateToProps, { SearchDetails })(Chat));

@@ -33,7 +33,11 @@ export function SearchDetails(searchdata) {
         console.log(response);
         
       })
-   
+      .catch(error => {
+        dispatch(ErrorFunc(ActionTypes.FETCH_SEARCH_FAILURE, error));
+      });
 };
 }
+
+
 

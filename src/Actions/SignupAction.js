@@ -41,3 +41,20 @@ export function submitSignup(userdata) {
   };
 }
 
+export function userInformation() {
+  debugger;
+  return dispatch => {
+
+    dispatch(BeginFunc(ActionTypes.GET_USER_BEGIN));
+    HttpWrapper('GET','/users/getall', false, '')
+      .then(response => {
+        dispatch(SuccessFunc(ActionTypes.GET_USER_SUCCESS, response.data));
+        console.log(response);
+        
+      })
+      .catch(error => {
+        dispatch(ErrorFunc(ActionTypes.GET_USER_FAILURE, error));
+      });
+};
+}
+

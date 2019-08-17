@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {SearchDetails} from '../../Actions/SearchAction';
-// import axios from 'axios';
+import {userInformation} from '../../Actions/SignupAction';
+import './Search.css';
 
 class Search extends Component {
     constructor(props){
@@ -11,20 +12,33 @@ class Search extends Component {
             searchState:''
         };
     }
-
+componentDidMount(){
+    this.props.userInformation();
+}
    
     SearchName=()=>{
         debugger;
+        let reqobj={
+            username:this.state.searchState
+        }
        
-      this.props.SearchDetails(this.state.searchState);
+      this.props.SearchDetails(reqobj);
     
+}
+handleClick=(e,username)=>{
+    let reqobj={
+        username:username
+    }
+    this.props.SearchDetails(reqobj);
 }
     render() {
         return (
             <div>
-                 <input type="text" name="search" onChange={e => this.setState({ searchState: e.target.value })} value={this.state.searchState} />
-                <button onClick={this.SearchName} >Search</button>
-           {this.props.message}
+                <center> <input type="text" name="search" onChange={e => this.setState({ searchState: e.target.value })} value={this.state.searchState} />
+                <button onClick={this.SearchName} >Search</button></center>
+           {this.props.result.map((item,index)=>{
+               return <div  className="box-align" key={index} onClick={(e)=>this.handleClick(e,item.username)}>{item.username}</div>
+           })}
             </div>
         );
     }
@@ -32,8 +46,9 @@ class Search extends Component {
 
 const mapStateToProps = (state) => {
     debugger;
-    const { error, message } = state.SearchReducers;
-    return { error, message };
+    const { error, message,srcInfo } = state.SearchReducers;
+    const { result } = state.SignupReducers;
+    return { error, message,srcInfo ,result};
   };
   
-  export default withRouter(connect(mapStateToProps, { SearchDetails })(Search));
+  export default withRouter(connect(mapStateToProps, { SearchDetails,userInformation })(Search));
