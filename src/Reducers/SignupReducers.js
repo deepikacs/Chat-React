@@ -3,18 +3,19 @@ import * as ActionTypes from '../Actions/types';
 const INPUT_STATE = {
   loading: false,
   error: null,
-  signupmessage:''
+  msg:''
 };
 
 export default (state = INPUT_STATE, action) => {
+  debugger;
   switch (action.type) {
     case ActionTypes.ADD_SIGNUP_BEGIN:
       return { ...state, loading: true, error: null };
     case ActionTypes.ADD_SIGNUP_SUCCESS:
-      return { ...state, loading: false,signupmessage:action.payload.message1 }
+      return { ...state, loading: false, msg: action.payload.message1 }
     case ActionTypes.ADD_SIGNUP_FAILURE:
       return { ...state, loading: false, error: action.payload.message }
-    default:
+      default:
       return state;
   }
 };

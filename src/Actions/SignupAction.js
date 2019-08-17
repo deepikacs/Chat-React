@@ -1,6 +1,7 @@
 import * as ActionTypes from './types';
 import HttpWrapper from '../utils/HttpWrapper';
 import browserHistory from '../utils/browserHistory';
+import {HIDE_MSG} from "./types";
 
 export function BeginFunc(ActionType) {
   return { type: ActionType }
@@ -27,7 +28,11 @@ export function submitSignup(userdata) {
     HttpWrapper('POST', '/users/signup', false, userdata)
       .then(response => {
         dispatch(SuccessFunc(ActionTypes.ADD_SIGNUP_SUCCESS, response.data));
-        browserHistory.push('/');
+        
+        setTimeout(function() {
+          browserHistory.push('/');
+        }, 2000);
+        
       })
       
       .catch(error => {
@@ -35,3 +40,4 @@ export function submitSignup(userdata) {
       });
   };
 }
+

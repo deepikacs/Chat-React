@@ -119,8 +119,11 @@ class Signup extends Component {
   render() {
     return (
       <div>
+        {this.props.msg ?
+        <center><div className="bg-color">{this.props.msg}</div></center>
+      :''}
       <div className="div-align">
-       
+      
         <h3>Registration page</h3>
         <form method="" name="userRegistrationForm" onSubmit={this.submituserRegistrationForm} >
           <label><span className="errorMsg">*</span> Name</label>
@@ -161,8 +164,8 @@ class Signup extends Component {
 }
 
 const mapStateToProps = (state) => {
-  const { error } = state.SignupReducers;
-  return { error };
+  const { error,msg } = state.SignupReducers;
+  return { error,msg};
 };
 
 export default withRouter(connect(mapStateToProps, { submitSignup })(Signup));

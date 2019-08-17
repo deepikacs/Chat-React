@@ -55,3 +55,10 @@ input[type=number]::-webkit-outer-spin-button {
 .brder-red{
   border-color: red;
 }
+.bg-color{
+  background-color: #00BFFF;
+  padding: 12px;
+  margin-top: 20px;
+  margin-left: 25%;
+  margin-right: 25%;
+}

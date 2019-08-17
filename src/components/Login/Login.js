@@ -85,7 +85,8 @@ class Login extends Component {
             <input type="password" required className={`${this.errorClass(this.state.formErrors.password)}`} name="password" value={this.state.password} onChange={this.handleChange} />
             <div className="errorMsg">{this.state.formErrors.passwordValid}</div>
 
-            <input type="submit" className="button" value="Register" disabled={!this.state.formValid} />
+            <input type="submit" className="button" value="LOGIN" disabled={!this.state.formValid} />
+          <h5>Don't have an account ? <a href='/signup'>Signup</a></h5>
           </form>
           <center><div className="errorMsg">{this.props.message}</div></center>
         <center><div className="errorMsg">{this.props.error}</div></center>
@@ -101,8 +102,7 @@ class Login extends Component {
 
 const mapStateToProps = (state) => {
   const { error, message } = state.LoginReducers;
-  // const { signupmessage } = state.SignupReducers;
-  return { error, message };
+  return { error, message};
 };
 
 export default withRouter(connect(mapStateToProps, { submitLogin })(Login));

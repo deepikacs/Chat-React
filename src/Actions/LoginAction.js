@@ -35,6 +35,25 @@ export function submitLogin(logindata) {
         localStorage.setItem('userid', response.data.userId);
         browserHistory.push('/dashboard');
       })
+      .catch(error => {
+        dispatch(ErrorFunc(ActionTypes.FETCH_LOGIN_FAILURE, error.response.data));
+      });
     
 };
 }
+
+// export function SearchDetails(searchdata) {
+//   debugger;
+//   return dispatch => {
+
+//     dispatch(BeginFunc(ActionTypes.FETCH_SEARCH_BEGIN));
+//     HttpWrapper('POST','/users/search', false, searchdata)
+//       .then(response => {
+//         dispatch(SuccessFunc(ActionTypes.FETCH_SEARCH_SUCCESS, response.data));
+//         console.log(response);
+        
+//       })
+      
+   
+// };
+// }

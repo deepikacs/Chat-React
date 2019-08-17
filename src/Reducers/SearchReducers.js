@@ -15,7 +15,8 @@ export default (state = INPUT_STATE, action) => {
     return { ...state, loading: false,message:action.payload.message}
   case ActionTypes.FETCH_SEARCH_FAILURE:
     return { ...state, loading: false, error: action.payload}
-  default:
+  
+    default:
     return state;
   }
 };
