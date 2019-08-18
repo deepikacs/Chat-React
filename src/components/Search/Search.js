@@ -9,7 +9,8 @@ class Search extends Component {
     constructor(props){
         super(props);
         this.state={
-            searchState:''
+            searchState:'',
+            color:''
         };
     }
 componentDidMount(){
@@ -31,13 +32,18 @@ handleClick=(e,username)=>{
     }
     this.props.SearchDetails(reqobj);
 }
+changeColor(){
+    debugger;
+    this.setState({color:'blue'});
+
+}
     render() {
         return (
             <div>
                 <center> <input type="text" name="search" onChange={e => this.setState({ searchState: e.target.value })} value={this.state.searchState} />
                 <button onClick={this.SearchName} >Search</button></center>
            {this.props.result.map((item,index)=>{
-               return <div  className="box-align" key={index} onClick={(e)=>this.handleClick(e,item.username)}>{item.username}</div>
+               return <div  className="box-align" style={{Color:this.state.color}} key={index} onClick={this.changeColor.bind(this)} onClick={(e)=>this.handleClick(e,item.username)}>{item.username}</div>
            })}
             </div>
         );
