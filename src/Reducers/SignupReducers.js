@@ -8,7 +8,6 @@ const INPUT_STATE = {
 };
 
 export default (state = INPUT_STATE, action) => {
-  debugger;
   switch (action.type) {
     case ActionTypes.ADD_SIGNUP_BEGIN:
       return { ...state, loading: true, error: null };

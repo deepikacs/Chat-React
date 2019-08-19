@@ -10,15 +10,17 @@ class ChatInput extends Component {
     super(props);
     this.state = {
       message: '',
-      play:true
+      play:false
     }
   }
   
   sendmsg=()=>{
-    debugger;
-    // this.playSound();
-   this.setState({play:!this.state.play});
-   console.log(this.state.play)
+   this.setState({play:true});
+  setTimeout( () => {
+    this.setState( play => ({
+      play: false
+    }));
+  }, 2000);
   }
   
   
@@ -40,11 +42,10 @@ class ChatInput extends Component {
           value={this.state.message}
           onChange={e => this.setState({ message: e.target.value })}
         />
-        <input type="submit" value={'Send'} onClick={this.sendmsg} />
+        <input type="submit" value={'Send'} onClick={this.sendmsg} disabled={!this.props.srcInfo} />
             
       </form>
- {this.state.play?'':<audio src={hollow} controls autoPlay preload="auto" />}
- {/* <audio src={hollow} controls autoPlay preload="auto" onClick={() => this.playSound()} /> */}
+ {this.state.play?<audio src={hollow} controls autoPlay preload="auto" />:''}
         </div>
     )
   }

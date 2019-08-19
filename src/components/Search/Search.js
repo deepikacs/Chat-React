@@ -4,10 +4,12 @@ import { withRouter } from 'react-router-dom';
 import {SearchDetails} from '../../Actions/SearchAction';
 import {userInformation} from '../../Actions/SignupAction';
 import './Search.css';
+import ItemWrapper from './ItemWrapper';
 
 class Search extends Component {
     constructor(props){
         super(props);
+        this.handleClick = this.handleClick.bind(this);
         this.state={
             searchState:'',
             color:''
@@ -18,7 +20,6 @@ componentDidMount(){
 }
    
     SearchName=()=>{
-        debugger;
         let reqobj={
             username:this.state.searchState
         }
@@ -32,18 +33,18 @@ handleClick=(e,username)=>{
     }
     this.props.SearchDetails(reqobj);
 }
-changeColor(){
-    debugger;
-    this.setState({color:'blue'});
 
+clearAll(){
+    debugger
 }
+
     render() {
         return (
             <div>
                 <center> <input type="text" name="search" onChange={e => this.setState({ searchState: e.target.value })} value={this.state.searchState} />
                 <button onClick={this.SearchName} >Search</button></center>
            {this.props.result.map((item,index)=>{
-               return <div  className="box-align" style={{Color:this.state.color}} key={index} onClick={this.changeColor.bind(this)} onClick={(e)=>this.handleClick(e,item.username)}>{item.username}</div>
+               return <ItemWrapper clearAll={this.clearAll} index={index} item={item} handleClick={this.handleClick} />
            })}
             </div>
         );
@@ -51,7 +52,6 @@ changeColor(){
 }
 
 const mapStateToProps = (state) => {
-    debugger;
     const { error, message,srcInfo } = state.SearchReducers;
     const { result } = state.SignupReducers;
     return { error, message,srcInfo ,result};

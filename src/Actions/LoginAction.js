@@ -23,7 +23,6 @@ export function ErrorFunc(ActionType, error) {
 
 
 export function submitLogin(logindata) {
-  debugger;
   return dispatch => {
 
     dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN));

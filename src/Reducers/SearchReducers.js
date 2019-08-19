@@ -4,11 +4,11 @@ const INPUT_STATE = {
   loading: false,
   error: null,
   message:'',
-  srcInfo:''
+  srcInfo:'',
+  resetColorFn: ''
 };
 
 export default (state = INPUT_STATE, action) => {
-  debugger;
   switch (action.type) {
    case ActionTypes.FETCH_SEARCH_BEGIN:
     return { ...state, loading: true, error: null };
@@ -16,7 +16,6 @@ export default (state = INPUT_STATE, action) => {
     return { ...state, loading: false,message:action.payload.message,srcInfo:action.payload.result.username}
   case ActionTypes.FETCH_SEARCH_FAILURE:
     return { ...state, loading: false, error: action.payload}
-  
     default:
     return state;
   }

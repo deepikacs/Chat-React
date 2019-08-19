@@ -18,3 +18,13 @@
 .borderNone{
     border:none
 }
+.msg-align{
+    background: #dddae4;
+    text-align: center;
+}
+.msg-div-align{
+    height: 100px;
+    margin-left: 160px;
+    padding: 10px;
+    /* overflow: scroll; */
+}

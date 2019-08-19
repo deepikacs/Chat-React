@@ -22,7 +22,6 @@ export function ErrorFunc(ActionType, error) {
 }
 
 export function submitSignup(userdata) {
-  debugger;
   return dispatch => {
     dispatch(BeginFunc(ActionTypes.ADD_SIGNUP_BEGIN));
     HttpWrapper('POST', '/users/signup', false, userdata)
@@ -42,7 +41,6 @@ export function submitSignup(userdata) {
 }
 
 export function userInformation() {
-  debugger;
   return dispatch => {
 
     dispatch(BeginFunc(ActionTypes.GET_USER_BEGIN));
