@@ -23,7 +23,6 @@ export function ErrorFunc(ActionType, error) {
 
 
 export function submitLogin(logindata) {
-  debugger;
   return dispatch => {
 
     dispatch(BeginFunc(ActionTypes.FETCH_LOGIN_BEGIN));
@@ -42,18 +41,3 @@ export function submitLogin(logindata) {
 };
 }
 
-// export function SearchDetails(searchdata) {
-//   debugger;
-//   return dispatch => {
-
-//     dispatch(BeginFunc(ActionTypes.FETCH_SEARCH_BEGIN));
-//     HttpWrapper('POST','/users/search', false, searchdata)
-//       .then(response => {
-//         dispatch(SuccessFunc(ActionTypes.FETCH_SEARCH_SUCCESS, response.data));
-//         console.log(response);
-        
-//       })
-      
-   
-// };
-// }

@@ -15,8 +15,6 @@ class ChatInput extends Component {
   }
   
   sendmsg=()=>{
-    debugger;
-    // this.playSound();
    this.setState({play:!this.state.play});
    console.log(this.state.play)
   }
@@ -44,7 +42,6 @@ class ChatInput extends Component {
             
       </form>
  {this.state.play?'':<audio src={hollow} controls autoPlay preload="auto" />}
- {/* <audio src={hollow} controls autoPlay preload="auto" onClick={() => this.playSound()} /> */}
         </div>
     )
   }

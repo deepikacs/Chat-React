@@ -156,6 +156,7 @@ class Signup extends Component {
 {/* <button type="submit" className="button" value="Register" disabled={!this.state.formValid}>Signup</button> */}
           <button type="submit" className="button" value="Register" >Signup</button>
         </form>
+      <div className="errorMsg">{this.props.error}</div>
       </div>
       </div>
 

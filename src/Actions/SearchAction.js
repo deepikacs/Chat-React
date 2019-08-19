@@ -23,7 +23,6 @@ export function ErrorFunc(ActionType, error) {
 
 
 export function SearchDetails(searchdata) {
-  debugger;
   return dispatch => {
 
     dispatch(BeginFunc(ActionTypes.FETCH_SEARCH_BEGIN));

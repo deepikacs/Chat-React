@@ -40,7 +40,6 @@ class Chat extends Component {
     this.setState(state => ({ messages: [message, ...state.messages] }))
 
   submitMessage = messageString => {
-      debugger;
     // on submitting the ChatInput form, send the message, add it to the list and reset the input
     const message = { name: this.props.srcInfo, message: messageString }
     this.ws.send(JSON.stringify(message))
@@ -50,6 +49,7 @@ class Chat extends Component {
   render() {
     return (
       <div>
+        <center>
         <label htmlFor="name">
           Name:&nbsp;
           <input
@@ -59,6 +59,8 @@ class Chat extends Component {
             className="borderNone"
           />
         </label>
+        </center>
+        <div className="msg-div-align">
         {this.state.messages.map((message, index) =>
           <ChatMessage
             key={index}
@@ -66,6 +68,7 @@ class Chat extends Component {
             name={message.name}
           />,
         )}
+        </div>
         <ChatInput
           ws={this.ws}
           onSubmitMessage={messageString => this.submitMessage(messageString)}
@@ -78,7 +81,6 @@ class Chat extends Component {
 
 // export default Chat;
 const mapStateToProps = (state) => {
-  debugger;
   const { error, message,srcInfo } = state.SearchReducers;
   return { error, message,srcInfo };
 };
