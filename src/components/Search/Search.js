@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import {SearchDetails} from '../../Actions/SearchAction';
-import {userInformation} from '../../Actions/SignupAction';
+import {userInformation,dynamicColor} from '../../Actions/SignupAction';
 import './Search.css';
 
 class Search extends Component {
@@ -31,8 +31,19 @@ handleClick=(e,username)=>{
     }
     this.props.SearchDetails(reqobj);
 }
-changeColor=()=>{
-    this.setState({color:'blue'});
+changeColor=(id)=>{
+
+   this.props.result.forEach((item,i)=>{
+       if(i==id){
+        this.props.result[id].color="#0000ff";
+       }
+       else{
+        this.props.result[i].color=null;
+       }
+   
+    this.props.dynamicColor(this.props.result);
+    
+   })
 
 }
     render() {
@@ -41,9 +52,9 @@ changeColor=()=>{
                 <center> <input type="text" name="search" onChange={e => this.setState({ searchState: e.target.value })} value={this.state.searchState} />
                 <button onClick={this.SearchName} >Search</button></center>
            {this.props.result.map((item,index)=>{
-               return <div  className="box-align" style={{Color:this.state.color}} key={index} 
-               onClick={(e)=>this.handleClick(e,item.username)} 
-               onMouseEnter={this.changeColor}
+               return <div  className="box-align" style={{background:item.color}} key={index} 
+               onClick={(e)=>{this.handleClick(e,item.username);this.changeColor(index)} }
+            //    onMouseEnter={this.changeColor(item._id)}
                >{item.username}</div>
            })}
             </div>
@@ -51,10 +62,13 @@ changeColor=()=>{
     }
 }
 
+
 const mapStateToProps = (state) => {
+    debugger;
     const { error, message,srcInfo } = state.SearchReducers;
     const { result } = state.SignupReducers;
+
     return { error, message,srcInfo ,result};
   };
   
-  export default withRouter(connect(mapStateToProps, { SearchDetails,userInformation })(Search));
+  export default withRouter(connect(mapStateToProps, { SearchDetails,userInformation,dynamicColor})(Search));

@@ -42,10 +42,15 @@ export function submitSignup(userdata) {
 
 export function userInformation() {
   return dispatch => {
-
+debugger;
     dispatch(BeginFunc(ActionTypes.GET_USER_BEGIN));
+
     HttpWrapper('GET','/users/getall', false, '')
       .then(response => {
+        response.data.result.forEach((data1,i)=>{
+          response.data.result[i].color='null'
+          })
+          console.log(response)
         dispatch(SuccessFunc(ActionTypes.GET_USER_SUCCESS, response.data));
         console.log(response);
         
@@ -54,5 +59,15 @@ export function userInformation() {
         dispatch(ErrorFunc(ActionTypes.GET_USER_FAILURE, error));
       });
 };
+}
+
+export function dynamicColor(data){
+  debugger;
+  return function (dispatch){
+      dispatch({
+          type:"CHANGE_COLOR",
+          payload:data
+      });
+  }
 }
 

@@ -23,6 +23,8 @@ export default (state = INPUT_STATE, action) => {
       case ActionTypes.GET_USER_FAILURE:
       return { ...state, loading: false, error: action.payload.message }
 
+      case ActionTypes.CHANGE_COLOR:
+      return {...state,result:action.payload}
       default:
       return state;
   }
