@@ -4,6 +4,8 @@ import Login from '../Login';
 import Signup from '../Signup';
 import Dashboard from '../Dashboard';
 import Chat from '../Chat';
+import SimpleForm from '../SimpleForm';
+import UpdateFormMain from '../UpdateFormMain';
 
 // use whenever you want private route
 const PrivateRoute = ({ component: Component, ...rest }) => {
@@ -22,7 +24,9 @@ class App extends Component {
       <div>
         <Router>
         <Switch>
-        <Route exact path='/' component={Login}></Route>
+        <Route exact path='/' component={SimpleForm}></Route>
+        <Route exact path='/update/:userid' component={UpdateFormMain}></Route>
+        {/* <Route exact path='/' component={Login}></Route> */}
         <Route exact path='/signup' component={Signup}></Route>
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path='/chat' component={Chat}/>
