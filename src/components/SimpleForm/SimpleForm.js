@@ -4,25 +4,13 @@ import { SignupDetails, signinForm_Update, getAllUsers, getByUserId } from '../.
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom';
 import browserHistory from '../../utils/browserHistory';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
+// var Spinner = require('react-spinkit');
+import Loadable from 'react-loading-overlay';
+
 
 class SimpleForm extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      name: this.props.name,
-      email: this.props.email,
-      password: this.props.password
-    }
 
-  }
-  // componentWillMount(){
-  //   debugger;
-  // const  name=this.props.name;
-  // const email=this.props.email;
-  // const password=this.props.password;
-
-  // }
 
   componentDidMount() {
     this.props.getAllUsers();
@@ -38,7 +26,6 @@ class SimpleForm extends Component {
   }
 
   handleSubmit = (e) => {
-
     e.preventDefault();
     let data = {
       Name: this.props.name,
@@ -50,22 +37,36 @@ class SimpleForm extends Component {
     this.props.getAllUsers();
   }
 
- 
+
   render() {
+    console.log(this.props.loading);
     return (
+
       <div>
-        <form onSubmit={this.handleSubmit}>
-          <label>Name</label>
-          <input type="text" name="name" value={this.props.name} onChange={this.handleChange} />
 
-          <label>Email</label>
-          <input type="text" name="email" value={this.props.email} onChange={this.handleChange} />
+        <Loadable
+          active={this.props.loading1}
+          spinner
+          text='Loading..'
+          style={{ position: 'static' }}
+        >
+          <form onSubmit={this.handleSubmit}>
+            <label>Name</label>
+            <input type="text" name="name" value={this.props.name} onChange={this.handleChange} />
 
-          <label>Password</label>
-          <input type="text" name="password" value={this.props.password} onChange={this.handleChange} />
+            <label>Email</label>
+            <input type="text" name="email" value={this.props.email} onChange={this.handleChange} />
 
-          <input type="submit" />
-        </form>
+            <label>Password</label>
+            <input type="text" name="password" value={this.props.password} onChange={this.handleChange} />
+
+            <input type="submit" />
+          </form>
+        </Loadable>
+        {/* {this.props.loading?
+        <Spinner name='double-bounce' /> :''} */}
+
+        <h3>{this.props.formSubmitMsg}</h3>
         <table>
           <thead>
             <tr>
@@ -83,7 +84,7 @@ class SimpleForm extends Component {
                   <td>{item.email}</td>
                   <td>{item.password}</td>
                   {/* <button type="text" onClick={(e) => { this.updateBtn(e, item._id) }} >update</button> */}
-                  <Link className="link_height" to={`${'/update/'}${item._id}` }>Edit</Link>
+                  <Link className="" to={`${'/update/'}${item._id}`}>Edit</Link>
                 </tr>
               ))}
           </tbody>
@@ -96,8 +97,9 @@ class SimpleForm extends Component {
 
 const mapStateToProps = (state) => {
   debugger;
-  const { error, name, email, password, getAllUserList, getUserById } = state.SimpleFormReducers;
-  return { error, name, email, password, getAllUserList, getUserById };
+  console.log(state.SimpleFormReducers)
+  const { error, name, email, password, getAllUserList, getUserById, formSubmitMsg, loading1 } = state.SimpleFormReducers;
+  return { error, name, email, password, getAllUserList, getUserById, formSubmitMsg, loading1 };
 };
 
 export default withRouter(connect(mapStateToProps, { SignupDetails, signinForm_Update, getAllUsers, getByUserId })(SimpleForm));

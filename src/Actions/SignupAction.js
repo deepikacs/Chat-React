@@ -42,7 +42,6 @@ export function submitSignup(userdata) {
 
 export function userInformation() {
   return dispatch => {
-debugger;
     dispatch(BeginFunc(ActionTypes.GET_USER_BEGIN));
 
     HttpWrapper('GET','/users/getall', false, '')
@@ -62,7 +61,6 @@ debugger;
 }
 
 export function dynamicColor(data){
-  debugger;
   return function (dispatch){
       dispatch({
           type:"CHANGE_COLOR",

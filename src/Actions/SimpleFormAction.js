@@ -3,6 +3,7 @@ import HttpWrapper from '../utils/HttpWrapper';
 import {
   SIGNINFORM_UPDATE,
 } from './types';
+import browserHistory from '../utils/browserHistory';
 
 export function BeginFunc(ActionType) {
   return { type: ActionType }
@@ -23,7 +24,6 @@ export function ErrorFunc(ActionType, error) {
 }
 
 export const signinForm_Update = ({ prop, value }) => {
-  debugger;
   return {
     type: SIGNINFORM_UPDATE,
     payload: { prop, value }
@@ -31,19 +31,30 @@ export const signinForm_Update = ({ prop, value }) => {
 }
 
 export function SignupDetails(userdata) {
+  // let loading_status = true;
+  
+// return dispatch({ type: LOADING, payload: loading_status  });
+
   return dispatch => {
     dispatch(BeginFunc(ActionTypes.SUBMIT_FORM_BEGIN));
-    HttpWrapper('POST', '/users/signup', false, userdata)
-      .then(response => {
-        dispatch(SuccessFunc(ActionTypes.SUBMIT_FORM_SUCCESS, response.data));
+    // setTimeout(function() {
+      // console.log('in action');
+        HttpWrapper('POST', '/users/simpleformsubmit', false, userdata)
+        .then(response => {
+          console.log(response.data);
+          setTimeout(function(){
+          dispatch(SuccessFunc(ActionTypes.SUBMIT_FORM_SUCCESS, response.data));
+        },2000)
+        })
 
 
-
-      })
-
-      .catch(error => {
-        dispatch(ErrorFunc(ActionTypes.SUBMIT_FORM_FAILURE, error));
-      });
+        .catch(error => {
+          console.log(error);
+          dispatch(ErrorFunc(ActionTypes.SUBMIT_FORM_FAILURE, error));
+        });
+    // }, 5000);
+    // console.log("Action")
+    
   };
 }
 
@@ -57,12 +68,10 @@ export function getAllUsers() {
 }
 
 export function getByUserId(id) {
-  debugger;
   let path="/users/getIDByUser/";
   return dispatch => {
     HttpWrapper('GET', `${path}${id}`, false, id)
       .then(response => {
-        debugger;
         dispatch(SuccessFunc(ActionTypes.GET_BY_USER_ID, response.data.result));
 })
 };
@@ -74,7 +83,7 @@ export function updateFunction(userdata) {
     HttpWrapper('POST', '/users/updateuser', false, userdata)
       .then(response => {
         dispatch(SuccessFunc(ActionTypes.UPDATE_FORM_SUCCESS, response.data));
-
+          browserHistory.push('/simpleform');
 
 
       })

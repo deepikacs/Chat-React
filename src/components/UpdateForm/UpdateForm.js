@@ -36,6 +36,7 @@ class UpdateForm extends Component {
     
       }
     handleUpdate = () =>{
+        debugger;
     let updatedata={id:this.props.data._id,name:this.props.name,email:this.props.email,password:this.props.password}
    this.props.updateFunction(updatedata);    
 }
@@ -61,7 +62,6 @@ class UpdateForm extends Component {
 
 
 const mapStateToProps = (state) => {
-    debugger;
     const { error, name, email, password, getUserById } = state.SimpleFormReducers;
     return { error, name, email, password,getUserById };
   };
