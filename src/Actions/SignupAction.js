@@ -41,6 +41,7 @@ export function submitSignup(userdata) {
 }
 
 export function userInformation() {
+  debugger;
   return dispatch => {
     dispatch(BeginFunc(ActionTypes.GET_USER_BEGIN));
 
