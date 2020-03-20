@@ -64,7 +64,6 @@ changeColor=(id)=>{
 
 
 const mapStateToProps = (state) => {
-    debugger;
     const { error, message,srcInfo } = state.SearchReducers;
     const { result } = state.SignupReducers;
 

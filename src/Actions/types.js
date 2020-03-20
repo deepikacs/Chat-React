@@ -15,3 +15,20 @@ export const GET_USER_SUCCESS = 'GET_USER_SUCCESS';
 export const GET_USER_FAILURE = 'GET_USER_FAILURE';
 
 export const CHANGE_COLOR = 'CHANGE_COLOR';
+
+export const SUBMIT_FORM_BEGIN= 'SUBMIT_FORM_BEGIN';
+export const SUBMIT_FORM_SUCCESS= 'SUBMIT_FORM_SUCCESS';
+export const SUBMIT_FORM_FAILURE= 'SUBMIT_FORM_FAILURE';
+
+export const SIGNINFORM_UPDATE = 'signinForm_Update';
+export const GET_ALL_USER = 'GET_ALL_USER';
+
+export const GET_BY_USER_ID ='GET_BY_USER_ID';
+
+export const UPDATE_FORM_BEGIN= 'UPDATE_FORM_BEGIN';
+export const UPDATE_FORM_SUCCESS= 'UPDATE_FORM_SUCCESS';
+export const UPDATE_FORM_FAILURE= 'UPDATE_FORM_FAILURE';
+
+export const Dynamic_Onchange = 'Dynamic_Onchange';
+
+export const LOADING = 'LOADING';
